@@ -4,6 +4,7 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.FirebaseUser
 import com.hacib.duygusalbiruygulama.network.Constants
 import com.hacib.duygusalbiruygulama.network.NetworkListener
@@ -42,14 +43,14 @@ class LoginViewModel(
             && (password!!.length >= 6)
         ) {
             io {
-                var result = repository.loginRequest(email!!, password!!)
-                if (result?.user != null) {
-                    listener?.onSuccess("Login succeed ${result?.user!!.uid}")
-                } else {
-                    listener?.onError("Error while authentication")
+                try {
+                    repository.loginRequest(email!!, password!!)?.user?.let {
+                        listener?.onSuccess("Login succeed ${it?.email}")
+                        user.postValue(it)
+                    }
+                } catch (e: FirebaseAuthException) {
+                    listener?.onError(e.message!!)
                 }
-                listener?.onFinished("login request ${Constants.NETWORK_FINISHED}")
-                user.postValue(result?.user)
             }
         } else {
             listener?.onError("Your entered wrong formatted e-Mail or your password less than 6 characters")
