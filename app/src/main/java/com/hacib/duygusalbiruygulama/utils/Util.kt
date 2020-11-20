@@ -7,8 +7,12 @@ import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 
-fun Context.toast(message: String) {
+fun Context.shortToast(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+}
+
+fun Context.longToast(message: String) {
+    Toast.makeText(this, message, Toast.LENGTH_LONG).show()
 }
 
 object Util {

@@ -1,8 +1,7 @@
 package com.hacib.duygusalbiruygulama.login
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import com.hacib.duygusalbiruygulama.R
@@ -10,9 +9,8 @@ import com.hacib.duygusalbiruygulama.databinding.ActivityLoginBinding
 import com.hacib.duygusalbiruygulama.network.Firebase
 import com.hacib.duygusalbiruygulama.network.NetworkListener
 import com.hacib.duygusalbiruygulama.utils.Util
-import com.hacib.duygusalbiruygulama.utils.toast
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import com.hacib.duygusalbiruygulama.utils.longToast
+import com.hacib.duygusalbiruygulama.utils.shortToast
 
 class LoginActivity : AppCompatActivity(), NetworkListener {
 
@@ -42,13 +40,13 @@ class LoginActivity : AppCompatActivity(), NetworkListener {
 
     override fun onSuccess(message: String) {
         Util.main {
-            toast(message)
+            shortToast(message)
         }
     }
 
     override fun onError(message: String) {
         Util.main {
-            toast(message)
+            longToast(message)
         }
     }
 
