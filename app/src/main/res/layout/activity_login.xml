@@ -19,7 +19,7 @@
 
         <EditText
             android:id="@+id/edtUserName"
-            android:text="@={viewModel.userName}"
+            android:text="@={viewModel.email}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
