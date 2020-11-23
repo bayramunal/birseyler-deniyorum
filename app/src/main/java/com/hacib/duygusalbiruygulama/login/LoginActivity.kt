@@ -1,11 +1,13 @@
 package com.hacib.duygusalbiruygulama.login
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import com.hacib.duygusalbiruygulama.R
 import com.hacib.duygusalbiruygulama.databinding.ActivityLoginBinding
+import com.hacib.duygusalbiruygulama.main.MainModuleActivity
 import com.hacib.duygusalbiruygulama.network.Firebase
 import com.hacib.duygusalbiruygulama.network.NetworkListener
 import com.hacib.duygusalbiruygulama.utils.Util
@@ -28,10 +30,6 @@ class LoginActivity : AppCompatActivity(), NetworkListener {
         viewModel = ViewModelProviders.of(this, factory).get(LoginViewModel::class.java)
         dataBinding.viewModel = viewModel
         viewModel.listener = this
-
-        viewModel.getUser().observe(this, {
-            //toast(it.uid)
-        })
     }
 
     override fun onStart(message: String) {
@@ -40,7 +38,13 @@ class LoginActivity : AppCompatActivity(), NetworkListener {
 
     override fun onSuccess(message: String) {
         Util.main {
-            shortToast(message)
+            val intent = Intent(this, MainModuleActivity::class.java)
+                .addFlags(
+                    Intent.FLAG_ACTIVITY_NEW_TASK
+                            or
+                            Intent.FLAG_ACTIVITY_CLEAR_TASK
+                )
+            startActivity(intent)
         }
     }
 
