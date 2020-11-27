@@ -38,6 +38,7 @@
             app:layout_constraintRight_toRightOf="parent"
             android:layout_marginTop="10dp"
             android:hint="@string/edt_password_hint"
+            android:inputType="textPassword"
             />
 
         <Button
